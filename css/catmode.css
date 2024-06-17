@@ -14,8 +14,11 @@ body {
 
 .page-title {
     color: antiquewhite;
-    text-align: center;
-    padding: 20px, 0;
+    text-align: left;
+    padding: 20px 0 0 40px;
+    font-family: 'Grenze Gotisch', sans-serif;
+    font-weight: 600;
+    font-size: 60px;
 }
 
 body {

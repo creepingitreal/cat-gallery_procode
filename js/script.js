@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showLessButton = document.querySelector('#show-less');
     let catData = [];
     let currentIndex = 0;
-    const limit = 6;
+    const limit = 3;
     
     function catMode() {
         let stylesheet = document.querySelector('#stylesheet');
@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             singleCat.appendChild(catImg);
             container.appendChild(singleCat);
+
+            catImg.addEventListener('click', () => openCat(catImg.src, catImg.alt))
         });
         currentIndex = endIndex;
 
@@ -79,25 +81,28 @@ document.addEventListener('DOMContentLoaded', () => {
     showMoreButton.addEventListener('click', showMoreCats);
     showLessButton.addEventListener('click', showLessCats);
     
-    const singleCat = document.querySelector('.single-cat');
-
     function openCat(src, alt) { //here i am trying to get a modal to open when an image is clicked on
         const catModal = document.createElement('div');
         catModal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content');
 
         const modalImage = document.createElement('img');
         modalImage.src = src;
         modalImage.alt = alt;
 
-        catModal.appendChild(modalImage);
+        const closeModal = document.createElement('span');
+        closeModal.classList.add('close');
+        closeModal.innerHTML = '&times;';
+
+        closeModal.addEventListener('click', () => {
+            document.body.removeChild(catModal);
+        });
+
+        modalContent.appendChild(closeModal);
+        modalContent.appendChild(modalImage);
+        catModal.appendChild(modalContent);
         document.body.appendChild(catModal);
-
-        catModal.style.display = 'block';
-
     }
-   singleCat.forEach(catImg => {
-    let src = catImg.src;
-    let alt = catImg.alt;
-    openCat(src, alt);
-   })
 });
