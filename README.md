@@ -22,3 +22,7 @@ CSS
 
     ##### Open individual image
         Click an image to open a larger view of that cat. To close, click the cross in the top corner.
+
+    ##### Cat Mode
+        Click "Cat Mode" button to switch style sheets (for the more enthused cat-lover, inspired by bootcamp peer Sophie Preston)
+        

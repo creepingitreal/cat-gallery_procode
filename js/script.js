@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showMoreButton.addEventListener('click', showMoreCats);
     showLessButton.addEventListener('click', showLessCats);
     
-    function openCat(src, alt) { //here i am trying to get a modal to open when an image is clicked on
+    function openCat(src, alt) { //here i am trying to get a modal to open when an image is clicked on.
         const catModal = document.createElement('div');
         catModal.classList.add('modal');
         catModal.style.display = 'block';

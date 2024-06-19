@@ -5,11 +5,13 @@
 }
 
 .page-title {
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #82177e;
+    /* color: antiquewhite; */
     text-align: left;
-    padding: 20px 0 0 40px;
     font-family: 'Grenze Gotisch', sans-serif;
     font-weight: 600;
-    font-size: 80px;
+    font-size: 100px;
 }
 
 body {
@@ -29,7 +31,7 @@ body {
     height: 300px;
     width: 300px;
     padding: 15px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.4) 1.95px 1.95px 4px;
 }
 
 img {
@@ -56,7 +58,7 @@ li :hover {
     position: relative;
     margin: auto;
     padding: 0;
-    width: 80%;
+    width: 100%;
     max-width: 400px;
 }
 
