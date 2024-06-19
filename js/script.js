@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.querySelector('.toggle-button');
+    const errorMessage = document.querySelector('#error-message');
     const container = document.querySelector('.cat-container');
     const showMoreButton = document.querySelector('#show-more');
     const showLessButton = document.querySelector('#show-less');
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('https://cataas.com/api/cats')
         .then((res) => {
             if (!res.ok) {
-                throw new Error('Network response error. Needs a hug. And a cat.');
+                throw new Error('Network response error. Needs a hug. And a cat.'); //error message displayed in console
             }
             return res.json();
         })
@@ -30,7 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
             catData = data;
             showMoreCats(); // to show the cats on load
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            console.log(error)
+            displayError('Cats failed to load. Please try again later.'); //display error to user
+            });
+
+       function displayError(message) {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        }
 
     function showMoreCats() { // function to show more cats
         const endIndex = currentIndex + limit;
@@ -48,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             singleCat.appendChild(catImg);
             container.appendChild(singleCat);
 
-            singleCat.addEventListener('click', () => openCat(catImg.src, catImg.alt))
+            singleCat.addEventListener('click', () => openCat(catImg.src, catImg.alt)) //event listening in this function so that if a single image is clicked on it will open it in a modal
         });
         currentIndex = endIndex;
 
@@ -58,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showMoreButton.style.display = 'block';
         }
 
-        showLessButton.style.display = currentIndex > limit ? 'block' : 'none';
+        showLessButton.style.display = currentIndex > limit ? 'block' : 'none'; //display button if the current index is bigger than 3
     }
 
     function showLessCats() {
@@ -97,8 +106,30 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal.classList.add('close');
         closeModal.innerHTML = '&times;';
 
+        // const shareBtn = document.createElement('button');
+        // shareBtn.classList.add('share-btn');
+        // shareBtn.innerHTML("share");
+
         closeModal.addEventListener('click', () => {
             document.body.removeChild(catModal);
+
+        // shareBtn.addEventListener('click', () =>{
+        //     if (nanvigator.share){
+        //                navigator.share({
+        //         title: 'Check out this cat!',
+        //         text: alt,
+        //         url: src
+        //     }).then(()=> {
+        //         console.log('Thanks for sharing cats!')
+        //     })
+        //     .catch((error) => {
+        //         console.log('')
+        //     })     
+        //     }
+        //     else {
+                
+        //     }
+        // })
         });
 
         modalContent.appendChild(closeModal);
