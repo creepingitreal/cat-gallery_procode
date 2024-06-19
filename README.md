@@ -12,13 +12,13 @@ CSS
 ### How to use
 
     ##### Open the Application
-        Navigate to the application in your browser.
+        Open the index with a live server viewer
 
     ##### View Cat Images
-        The application will fetch and display a list of cat images in a grid layout.
+        The application will fetch and display a list of cat images in a grid layout fetching images from CATSAAS.
 
-    ##### Load More Images
-        Click the "Load More" button to fetch and append additional cat images to the existing list.
+    ##### Load More or Less Images
+        Click the "More Cats" button to fetch and additional cat images to the existing list. Click the "Less Cats" button to reduce the number of cat images on the screen.
 
-    ##### Responsive Design
-        The application is designed to be responsive and should provide a good user experience on various devices and screen sizes.
+    ##### Open individual image
+        Click an image to open a larger view of that cat. To close, click the cross in the top corner.

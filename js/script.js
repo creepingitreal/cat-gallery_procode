@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             singleCat.appendChild(catImg);
             container.appendChild(singleCat);
 
-            catImg.addEventListener('click', () => openCat(catImg.src, catImg.alt))
+            singleCat.addEventListener('click', () => openCat(catImg.src, catImg.alt))
         });
         currentIndex = endIndex;
 
@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openCat(src, alt) { //here i am trying to get a modal to open when an image is clicked on
         const catModal = document.createElement('div');
         catModal.classList.add('modal');
+        catModal.style.display = 'block';
 
         const modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
