@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     toggleBtn.addEventListener('click', catMode);
 
-    fetch('https://cataas.com/api/cats')
+    fetch('https://cataas.com/api/cats  ')
         .then((res) => {
             if (!res.ok) {
                 throw new Error('Network response error. Needs a hug. And a cat.'); //error message displayed in console
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
        function displayError(message) {
         errorMessage.textContent = message;
         errorMessage.style.display = 'block';
+        errorMessage.style.padding = '30px';
         }
 
     function showMoreCats() { // function to show more cats
@@ -57,7 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
             singleCat.appendChild(catImg);
             container.appendChild(singleCat);
 
-            singleCat.addEventListener('click', () => openCat(catImg.src, catImg.alt)) //event listening in this function so that if a single image is clicked on it will open it in a modal
+            singleCat.addEventListener('click', () => openCat(catImg.src, catImg.alt)); //event listening in this function so that if a single image is clicked on it will open it in a modal
+        
         });
         currentIndex = endIndex;
 
@@ -90,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showMoreButton.addEventListener('click', showMoreCats);
     showLessButton.addEventListener('click', showLessCats);
     
-    function openCat(src, alt) { //here i am trying to get a modal to open when an image is clicked on.
+    function openCat(src, alt) { // Modal to view the inndividual cat image from the gallery, with a share button that will offer the user the option to copy the image URL to share
         const catModal = document.createElement('div');
         catModal.classList.add('modal');
         catModal.style.display = 'block';
@@ -106,35 +108,36 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal.classList.add('close');
         closeModal.innerHTML = '&times;';
 
-        // const shareBtn = document.createElement('button');
-        // shareBtn.classList.add('share-btn');
-        // shareBtn.innerHTML("share");
+        const shareButton = document.createElement('button');
+        shareButton.classList.add('share-button')
+        shareButton.textContent = 'Share cat';
+
+        shareButton.addEventListener('click', () => shareCat(src));
 
         closeModal.addEventListener('click', () => {
             document.body.removeChild(catModal);
-
-        // shareBtn.addEventListener('click', () =>{
-        //     if (nanvigator.share){
-        //                navigator.share({
-        //         title: 'Check out this cat!',
-        //         text: alt,
-        //         url: src
-        //     }).then(()=> {
-        //         console.log('Thanks for sharing cats!')
-        //     })
-        //     .catch((error) => {
-        //         console.log('')
-        //     })     
-        //     }
-        //     else {
-                
-        //     }
-        // })
         });
 
         modalContent.appendChild(closeModal);
         modalContent.appendChild(modalImage);
+        modalContent.appendChild(shareButton);
         catModal.appendChild(modalContent);
         document.body.appendChild(catModal);
+    }
+
+    function shareCat(src) { //added basic share function to copy the cat image url so that the user can share the image (cat people love to tell people about the cats they're looking at)
+        const shareText = `Check out this cat: ${src}`;
+        if (navigator.share) {
+            navigator.share({
+                title: 'Cat Share!',
+                text: shareText,
+                url: src
+            })
+            .catch((error) => console.log('Sharing failed', error));
+        } else {
+            navigator.clipboard.writeText(shareText)
+                .then(() => alert('Cat URL copied to clipboard!'))
+                .catch((error) => console.log('Share failed', error));
+        }
     }
 });
