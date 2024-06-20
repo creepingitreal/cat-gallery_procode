@@ -200,6 +200,11 @@ footer p {
     .cat-container {
         grid-template-columns: 1fr 1fr;
     }
+    .page-title {
+        -webkit-text-stroke-width: 2px;
+        font-size: 70px;
+        font-weight: 400;
+    }
 
     body {
         padding: 0 80px;

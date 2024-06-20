@@ -5,10 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const showMoreButton = document.querySelector('#show-more');
     const showLessButton = document.querySelector('#show-less');
     const searchBar = document.querySelector('#search-bar');
+    const catSurprise = document.getElementById('cat-surprise');
+    const supriseButton = document.getElementById('surprise-button');
 
     let catData = [];
     let currentIndex = 0;
     const limit = 3;
+
+    catSurprise.setAttribute('tabindex', '0'); //the internet said to try this so that the escapt key would work   
     
     function catMode() {
         let stylesheet = document.querySelector('#stylesheet');
@@ -22,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     toggleBtn.addEventListener('click', catMode);
 
-    fetch('https://cataas.com/api/cats  ')
+    function fetchAllCats() {fetch('https://cataas.com/api/cats')
         .then((res) => {
             if (!res.ok) {
                 throw new Error('Network response error. Needs a hug. And a cat.'); //error message displayed in console
@@ -32,13 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((data) => {
             catData = data;
             showMoreCats(); // to show the cats on load
-        })
+        })  
         .catch((error) => {
             console.log(error)
             displayError('Cats failed to load. Please try again later.'); //display error to user
             });
+    }
 
-       function displayError(message) {
+    fetchAllCats();
+
+    function displayError(message) {
         errorMessage.textContent = message;
         errorMessage.style.display = 'block';
         errorMessage.style.padding = '30px';
@@ -155,20 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(query.trim() === '' ){ //to reset to fetch all cats if the input field is cleared 
             catData = []; //clear catData if the input is cleared
 
-            fetch('https://cataas.com/api/cats')
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Network response error. Needs a hug. And a cat.');
-                }
-                return res.json();
-            })
-            .then((data) => {
-                catData = data;
-                showMoreCats();
-            })
-            .catch((error) => {
-                displayError('Cats failed to load. Please try again later.');
-            });
+            fetchAllCats();
+
         } else {
             currentIndex = 0;
             const filteredCats = catData.filter(cat => cat.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())));
@@ -177,4 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
     }
+
+    supriseButton.addEventListener('click', () => {
+        catSurprise.style.display = 'block';
+        catSurprise.focus(); //using focus as the escape key was not working
+    })
+
+    catSurprise.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            catSurprise.style.display = 'none';
+        }
+    })
 });

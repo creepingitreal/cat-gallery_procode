@@ -14,17 +14,34 @@
 <body>
     <header>
         <h1 class="page-title">gallery of the cat</h1>
+        <button id="surprise-button"> cat surprise </button>
     </header>
    
-    <div class="toggle-container">
-       <button class="toggle-button">CAT MODE</button>
-    </div>
-    
-    <div id='search-container'>
-        <label id='search-label' for="input">Search Cats</label>
-        <input type="text" id="search-bar" placeholder="Search by tags...">    
-    </div>
-    
+    <section>
+        <div class="toggle-container">
+        <button class="toggle-button">CAT MODE</button>
+        </div>
+        
+        <div id='search-container'>
+            <label id='search-label' for="input">Search Cats</label>
+            <input type="text" id="search-bar" placeholder="Search by tags...">    
+        </div>
+
+        <div id="cat-surprise">
+            <div class="cat-gif">
+                <iframe src="https://giphy.com/embed/NVUuyo5DYmBZLKMAvI" 
+                    width="480" 
+                    height="480" 
+                    frameBorder="0" 
+                    class="giphy-embed" 
+                    allowFullScreen>
+                </iframe>
+                <p><a href="https://giphy.com/gifs/doodles-cute-cats-hipster-NVUuyo5DYmBZLKMAvI"></a></p>
+            </div>
+            <h2 color="#" >Thanks for looking.</h2>
+        </div>
+    </section>
+
     <div id="error-message" style="display: none; color: red;"></div>
     
     <main>
