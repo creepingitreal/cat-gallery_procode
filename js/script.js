@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.cat-container');
     const showMoreButton = document.querySelector('#show-more');
     const showLessButton = document.querySelector('#show-less');
+    const searchBar = document.querySelector('#search-bar');
+
     let catData = [];
     let currentIndex = 0;
     const limit = 3;
@@ -139,5 +141,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(() => alert('Cat URL copied to clipboard!'))
                 .catch((error) => console.log('Share failed', error));
         }
+    }
+
+    searchBar.addEventListener('input', () => {
+        const query = searchBar.value.toLowerCase();
+        filterCatsBytag(query);
+    })
+
+    function filterCatsBytag(query){
+        container.innerHTML = ''; //empty container
+        currentIndex = 0;
+
+        if(query.trim() === '' ){ //to reset to fetch all cats if the input field is cleared 
+            catData = []; //clear catData if the input is cleared
+
+            fetch('https://cataas.com/api/cats')
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Network response error. Needs a hug. And a cat.');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                catData = data;
+                showMoreCats();
+            })
+            .catch((error) => {
+                displayError('Cats failed to load. Please try again later.');
+            });
+        } else {
+            currentIndex = 0;
+            const filteredCats = catData.filter(cat => cat.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())));
+            catData = filteredCats;
+            showMoreCats();
+        }
+        
     }
 });

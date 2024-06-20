@@ -10,14 +10,23 @@
     <script src="/js/script.js" defer></script> 
     <title>Le Cafe des Chats</title>
 </head>
+
 <body>
     <header>
         <h1 class="page-title">gallery of the cat</h1>
     </header>
+   
     <div class="toggle-container">
        <button class="toggle-button">CAT MODE</button>
     </div>
+    
+    <div id='search-container'>
+        <label id='search-label' for="input">Search Cats</label>
+        <input type="text" id="search-bar" placeholder="Search by tags...">    
+    </div>
+    
     <div id="error-message" style="display: none; color: red;"></div>
+    
     <main>
         <ul class="cat-container"></ul>
         <div class="button-container">
@@ -26,6 +35,7 @@
         </div>
     </main>
 </body>
+
 <footer> 
     <h6>This website was designed begrudgingly by a dog-person.</h6>
     <p>Designed and built by Alexandra Demetriades. Not copywritten, so copy me.</p>
